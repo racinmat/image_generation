@@ -104,3 +104,35 @@ waifu diffusion vae downloaded from https://huggingface.co/hakurei/waifu-diffusi
 
 other useful tutorial
 https://rentry.org/hdgpromptassist#terms
+
+## Debugging and tuning materials after AF
+
+There have been 1814 images from AF, I selected a subset to cover
+- borderline porn
+- shiny ballsy stuff
+- weird and broken faces
+- some nice images to make sure they stay nice
+
+I want to:
+- get rid of ballsy stuff in default
+- strengthen push away from porn
+- fix faces
+- keep the nice stuff
+
+to recreate the stuff:
+copy images from dirs to some separate dire.
+Run `python prepare_input_list.py` with the dir name.
+Then use this file as input to `Batch from imagelist A`.
+In order to make it work, batch count and batch size must be 1, otherwise generated more images.
+It still takes lots of time to go through 100 images, better to make even smaller set.
+
+Recreating 30 images takes from 0:19 to 0:24, so ~5 mins.
+Images are not the same pixel-wise, but look almost the same, enough for benchmarks.
+Probably numeric instability.
+
+todo: in case of default prompt, remove the best shadow.
+
+Nový negative prompt:
+```
+(nsfw), (sex), (porn), (penis), (nipples), (vagina), anal, futa, (pussy), no panties, vaginal, (nude), (naked), bdsm, violence, (cum), cum in pussy, cum in mouth, x-ray, ahegao, erection, pubic hair, censored, testicles, lowres, text, error, cropped, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated, deformed, out of frame, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, futa, long neck, username, watermark, signature, see-through
+```
